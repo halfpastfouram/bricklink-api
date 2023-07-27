@@ -8,6 +8,7 @@ import { Superset } from './catalogItem/supersets';
 import { logger } from './logger';
 import { BricklinkRequest } from './request';
 import { BrickLinkApiError } from './brickLinkApiError';
+import {Inventory} from "./store/inventory";
 
 /**
  * Create a client to perform
@@ -189,6 +190,27 @@ export class Client {
    */
   getItemSuperset(itemType, itemNumber, params) {
     const req = Superset.get(itemType, itemNumber, params);
+    return this.send(req);
+  }
+
+  /**
+   * Get an inventory by identification number.
+   * @param {number} inventoryId An inventory identification number.
+   * @return {Promise<Inventory>} A promise that resolves to an inventory.
+   */
+  getInventory(inventoryId) {
+    const req = Inventory.get(inventoryId);
+
+    return this.send(req);
+  }
+
+  /**
+   * Get all inventories.
+   * @return {Promise<Inventory[]>} A promise that resolves to an array of inventories.
+   */
+  getInventories() {
+    const req = Inventory.all();
+
     return this.send(req);
   }
 }
