@@ -13,12 +13,6 @@ var config = {
 
 var bricklink = new Client(config);
 
-// bricklink.getCatalogItem(ItemType.Part, '3001').then(function (part) {
-//   console.log(part);
-// });
-
-bricklink.getInventory(232687996).then(function (inventory) {
-  console.log(inventory.remarks)
-  inventory.remarks += '1'
-  void bricklink.send(inventory.update())
+bricklink.getCatalogItem(ItemType.Part, '3001').then(function (part) {
+  console.log(part);
 });
