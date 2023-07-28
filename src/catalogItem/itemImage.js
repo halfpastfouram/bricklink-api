@@ -42,7 +42,7 @@ export class ItemImage {
     let method = BricklinkRequest.GET;
     let uri = `/items/${itemType}/${itemNumber}/images/${colorId}`;
 
-    return new BricklinkRequest(method, uri, null, (data) => {
+    return new BricklinkRequest(method, uri, null, null, (data) => {
       return new ItemImage(data);
     });
   }

@@ -76,7 +76,8 @@ export class Client {
     /** @type {RequestInit} */
     const init = {
       method: req.method,
-      headers: {},
+      headers: {'Content-Type': 'application/json'},
+      ...(req.method === 'put' || req.method === 'post' ? {body: JSON.stringify(req.body.toObject())} : {})
     };
 
     const oauthHelper = new OAuthHelper(this.consumer_key, this.token);

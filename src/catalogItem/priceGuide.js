@@ -81,7 +81,7 @@ export class PriceGuide {
     let method = BricklinkRequest.GET;
     let uri = `items/${itemType}/${itemNumber}/price`;
 
-    return new BricklinkRequest(method, uri, params, (data) => {
+    return new BricklinkRequest(method, uri, params, null, (data) => {
       return new PriceGuide(data);
     });
   }

@@ -61,7 +61,7 @@ export class CatalogItem {
     const  method = BricklinkRequest.GET;
     const uri = `/items/${itemType}/${itemNumber}`;
 
-    return new BricklinkRequest(method, uri, null, (data) => {
+    return new BricklinkRequest(method, uri, null, null, (data) => {
       const item = new CatalogItem(data);
       return item;
     });

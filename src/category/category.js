@@ -38,7 +38,7 @@ export class Category {
     let method = BricklinkRequest.GET;
     let uri = `/categories/${categoryId}`;
 
-    return new BricklinkRequest(method, uri, null, (data) => new Category(data));
+    return new BricklinkRequest(method, uri, null, null, (data) => new Category(data));
   }
 
   /**
@@ -56,7 +56,7 @@ export class Category {
     let method = BricklinkRequest.GET;
     let uri = `/categories`;
 
-    return new BricklinkRequest(method, uri, null, (data) =>
+    return new BricklinkRequest(method, uri, null, null, (data) =>
       data.map((d) => new Category(d)),
     );
   }

@@ -63,7 +63,7 @@ export class Superset {
     let method = BricklinkRequest.GET;
     let uri = `/items/${itemType}/${itemNumber}/supersets`;
 
-    return new BricklinkRequest(method, uri, options, (data) => {
+    return new BricklinkRequest(method, uri, options, null, (data) => {
       return data.map((set) => new Superset(set));
     });
   }

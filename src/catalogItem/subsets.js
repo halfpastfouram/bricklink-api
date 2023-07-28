@@ -67,7 +67,7 @@ export class Subset {
 
     const uri = `/items/${itemType}/${itemNumber}/subsets`;
 
-    return new BricklinkRequest(method, uri, options, (data) => {
+    return new BricklinkRequest(method, uri, options, null, (data) => {
       return data.map((e) => new Subset(e));
     });
   }

@@ -41,7 +41,7 @@ export class Color {
     let method = BricklinkRequest.GET;
     let uri = `/colors/${colorId}`;
 
-    return new BricklinkRequest(method, uri, null, (data) => new Color(data));
+    return new BricklinkRequest(method, uri, null, null, (data) => new Color(data));
   }
 
   /**
@@ -60,7 +60,7 @@ export class Color {
     let method = BricklinkRequest.GET;
     let uri = `/colors`;
 
-    return new BricklinkRequest(method, uri, null, (data) =>
+    return new BricklinkRequest(method, uri, null, null, (data) =>
       data.map((d) => new Color(d)),
     );
   }

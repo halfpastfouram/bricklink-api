@@ -1,4 +1,4 @@
-import {BricklinkRequest, RequestParams} from '../request';
+import {BricklinkRequest, RequestBody, RequestParams} from '../request';
 
 /**
  * Represents an inventory object
@@ -103,7 +103,7 @@ export class Inventory {
     let method = BricklinkRequest.GET;
     let uri = `/inventories/${inventoryId}`;
 
-    return new BricklinkRequest(method, uri, null, (data) => new Inventory(data));
+    return new BricklinkRequest(method, uri, null, null,(data) => new Inventory(data));
   }
 
   /**
@@ -122,7 +122,7 @@ export class Inventory {
     let method = BricklinkRequest.GET;
     let uri = `/inventories`;
 
-    return new BricklinkRequest(method, uri, null, (data) =>
+    return new BricklinkRequest(method, uri, null,  null,(data) =>
       data.map((d) => new Inventory(d)),
     );
   }
@@ -135,26 +135,32 @@ export class Inventory {
   update() {
     let method = BricklinkRequest.PUT;
     let uri = `/inventories/${this.inventory_id}`;
-    let params = new RequestParams();
-    params['quantity'] = 0
-    params['unit_price'] = this.quantity
-    params['description'] = this.description
-    params['remarks'] = this.remarks
-    params['bulk'] = this.bulk
-    params['is_retain'] = this.is_retain
-    params['is_stock_room'] = this.is_stock_room
-    if (this.is_stock_room) {
-      params['stock_room_id'] = this.stock_room_id
-    }
-    params['my_cost'] = this.my_cost
-    params['sale_rate'] = this.sale_rate
-    params['tier_quantity1'] = this.tier_quantity1
-    params['tier_price1'] = this.tier_price1
-    params['tier_quantity2'] = this.tier_quantity2
-    params['tier_price2'] = this.tier_price2
-    params['tier_quantity3'] = this.tier_quantity3
-    params['tier_price3'] = this.tier_price3
+    let body = new RequestBody();
 
-    return new BricklinkRequest(method, uri, params, (data) => new Inventory(data));
+    body['quantity'] = 0
+    body['unit_price'] = this.quantity
+    body['description'] = this.description
+    body['remarks'] = this.remarks
+    body['bulk'] = this.bulk
+    body['is_retain'] = this.is_retain
+    body['is_stock_room'] = this.is_stock_room
+    if (this.is_stock_room) {
+      body['stock_room_id'] = this.stock_room_id
+    }
+    body['my_cost'] = this.my_cost
+    body['sale_rate'] = this.sale_rate
+    if (
+      this.tier_quantity1 && this.tier_quantity2 && this.tier_quantity3 &&
+      this.tier_price1 && this.tier_price2 && this.tier_price3
+    ) {
+      body['tier_quantity1'] = this.tier_quantity1
+      body['tier_price1'] = this.tier_price1
+      body['tier_quantity2'] = this.tier_quantity2
+      body['tier_price2'] = this.tier_price2
+      body['tier_quantity3'] = this.tier_quantity3
+      body['tier_price3'] = this.tier_price3
+    }
+
+    return new BricklinkRequest(method, uri, null, body, (data) => new Inventory(data));
   }
 }

@@ -36,7 +36,7 @@ export class KnownColor {
     let method = BricklinkRequest.GET;
     let uri = `/items/${itemType}/${itemNumber}/colors`;
 
-    return new BricklinkRequest(method, uri, null, (data) => {
+    return new BricklinkRequest(method, uri, null, null, (data) => {
       return data.map((color) => new KnownColor(color));
     });
   }
